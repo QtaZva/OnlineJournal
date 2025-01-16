@@ -1,0 +1,15 @@
+﻿<Window x:Class="OnlineJournal.Windows.AddMarkWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OnlineJournal.Windows"
+        mc:Ignorable="d"
+        Title="Добавить оценку студенту" Height="450" Width="400">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+            <ComboBox x:Name="SubjectsComboBox" ItemsSource="{Binding Name}">
+            </ComboBox>
+        </StackPanel>
+    </Grid>
+</Window>

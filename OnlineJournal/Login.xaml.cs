@@ -1,23 +1,9 @@
 ﻿using OnlineJournal.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OnlineJournal.Models;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace OnlineJournal
 {
-    /// <summary>
-    /// Логика взаимодействия для Login.xaml
-    /// </summary>
     public partial class Login : Window
     {
         ApplicationContext db;
@@ -46,6 +32,28 @@ namespace OnlineJournal
 
             MessageBox.Show("Логин или пароль введены неверно");
 
+        }
+
+        private void SignUpButtonClick(object sender, RoutedEventArgs e)
+        {
+            var loginCheck = db.Users.Where(u => u.Login == RegUserLogin.Text).FirstOrDefault();
+            if (loginCheck != null)
+            {
+                MessageBox.Show("Данный логин уже занят!");
+                return;
+            }
+            User newUser = new User()
+            {
+                Login = RegUserLogin.Text,
+                Password = RegUserPassword.Password,
+                Name = RegUserName.Text,
+                Surname = RegUserSurname.Text,
+                Patronymic = RegUserPatronymic.Text,
+                AccessId = 1
+            };
+            db.Users.Add(newUser);
+            db.SaveChanges();
+            MessageBox.Show("Вы успешно зарегестрировались!");
         }
     }
 }

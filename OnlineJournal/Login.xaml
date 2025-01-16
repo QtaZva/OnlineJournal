@@ -12,17 +12,51 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="1" FontSize="36" Content="Вход" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Label FontSize="20" Content="Логин:"/>
-                <TextBox FontSize="20" x:Name="UserLogin" Width="150"/>
-            </StackPanel>
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Label FontSize="20" Content="Пароль:"/>
-                <PasswordBox FontSize="20" x:Name="UserPassword" Width="150"/>
-            </StackPanel>
-            <Button Content="Вход" FontSize="20" Click="SignInButtonClick"/>
-        </StackPanel>
+        <TabControl Grid.Column="1">
+            <TabItem Header="Вход">
+                <Grid>
+                    <Label Grid.Column="1" FontSize="36" Content="Вход" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Label FontSize="20" Content="Логин:"/>
+                            <TextBox FontSize="20" x:Name="UserLogin" Width="150"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Label FontSize="20" Content="Пароль:"/>
+                            <PasswordBox FontSize="20" x:Name="UserPassword" Width="150"/>
+                        </StackPanel>
+                        <Button Content="Вход" FontSize="20" Click="SignInButtonClick"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Регистрация">
+                <Grid>
+                    <Label Grid.Column="1" FontSize="36" Content="Регистрация" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Label FontSize="20" Content="Имя:"/>
+                            <TextBox FontSize="20" x:Name="RegUserName" Width="150"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Label FontSize="20" Content="Фамилия:"/>
+                            <TextBox FontSize="20" x:Name="RegUserSurname" Width="150"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Label FontSize="20" Content="Отчество:"/>
+                            <TextBox FontSize="20" x:Name="RegUserPatronymic" Width="150"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Label FontSize="20" Content="Логин:"/>
+                            <TextBox FontSize="20" x:Name="RegUserLogin" Width="150"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Label FontSize="20" Content="Пароль:"/>
+                            <PasswordBox FontSize="20" x:Name="RegUserPassword" Width="150"/>
+                        </StackPanel>
+                        <Button Content="Регистрация" FontSize="20" Click="SignUpButtonClick"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
