@@ -1,31 +1,42 @@
 ﻿using OnlineJournal.Classes;
-using System;
-using System.Collections.Generic;
+using OnlineJournal.Models;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace OnlineJournal.Windows
 {
-    /// <summary>
-    /// Логика взаимодействия для AddMarkWindow.xaml
-    /// </summary>
     public partial class AddMarkWindow : Window
     {
         ApplicationContext db;
+        private int StudentId;
         public AddMarkWindow(int studentId)
         {
             InitializeComponent();
             db = new ApplicationContext();
-            DataContext = db.Marks.ToList(); 
+            SubjectsComboBox.ItemsSource = db.Subjects.ToList();
+            StudentId = studentId;
+        }
+
+        private void ButtonMarkClick(object sender, RoutedEventArgs e)
+        {
+            if (MarkDate.SelectedDate != null)
+            {
+                Marks newMark = new Marks()
+                {
+                    UserId = StudentId,
+                    SubjectId = SubjectsComboBox.SelectedIndex + 1,
+                    date = MarkDate.SelectedDate.Value.Date.ToString(),
+                    Mark = MarkComboBox.SelectedIndex + 2
+                };
+                db.Marks.Add(newMark);
+                db.SaveChanges();
+                MessageBox.Show("Оценка поставленна");
+                this.Close();
+            }
+            else 
+            {
+                MessageBox.Show("Выберите дату");
+            }
         }
     }
 }

@@ -8,8 +8,24 @@
         Title="Добавить оценку студенту" Height="450" Width="400">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-            <ComboBox x:Name="SubjectsComboBox" ItemsSource="{Binding Name}">
-            </ComboBox>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Предмет"/>
+                <ComboBox x:Name="SubjectsComboBox" DisplayMemberPath="Name" SelectedIndex="0" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Оценка"/>
+                <ComboBox x:Name="MarkComboBox" SelectedIndex="0">
+                    <ComboBoxItem Content="2"/>
+                    <ComboBoxItem Content="3"/>
+                    <ComboBoxItem Content="4"/>
+                    <ComboBoxItem Content="5"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <DatePicker x:Name="MarkDate"/>
+            </StackPanel>
+            <Button Content="Поставить оценку" Margin="0 20 0 0" Click="ButtonMarkClick"/>
+
         </StackPanel>
     </Grid>
 </Window>

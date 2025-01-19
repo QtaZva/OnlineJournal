@@ -17,6 +17,9 @@ namespace OnlineJournal
             DataContext = user;
             WelcomeLabel.Content = $"Добро пожаловать {user.Name}!";
             db = new ApplicationContext();
+            UsersList.Visibility = Visibility.Hidden;
+            StudentsList.Visibility = Visibility.Hidden;
+            Journal.Visibility = Visibility.Hidden;
             switch (user.AccessId)
             {
                 case 1:
@@ -28,17 +31,22 @@ namespace OnlineJournal
                     break;
 
                 case 2:
-                    Journal.Visibility = Visibility.Hidden;
+                    StudentsList.Visibility = Visibility.Visible;
                     StudentsList.ItemsSource = db.Users.Where(u => u.AccessId == 1).ToList();
                     break;
 
                 case 3:
-                    Journal.Visibility = Visibility.Hidden;
-                    StudentsList.ItemsSource = db.Users.Where(u => u.AccessId == 1).ToList();
+                    UsersList.Visibility = Visibility.Visible;
+                    UsersList.ItemsSource = db.Users
+                        .Where(u => u.AccessId > 0 && u.AccessId < 3)
+                        .Include(u => u.AccessLevel)
+                        .ToList();
                     break;
 
                 default:
                     Journal.Visibility = Visibility.Hidden;
+                    StudentsList.Visibility = Visibility.Hidden;
+                    UsersList.Visibility = Visibility.Hidden;
                     break;
             }
             User = user;
@@ -69,6 +77,20 @@ namespace OnlineJournal
             {
                 ChangeStudentMarksWindow changeStudentMarksWindow = new(studentId);
                 changeStudentMarksWindow.Show();
+            }
+        }
+
+        private void ChangeAccessLevel(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null && button.Tag is int studentId)
+            {
+                ChangeAccessLevelWindow changeAccessLevelWindow = new(studentId);
+                changeAccessLevelWindow.ShowDialog();
+                UsersList.ItemsSource = db.Users
+                        .Where(u => u.AccessId > 0 && u.AccessId < 3)
+                        .Include(u => u.AccessLevel)
+                        .ToList();
             }
         }
     }

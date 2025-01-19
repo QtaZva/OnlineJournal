@@ -17,6 +17,11 @@ namespace OnlineJournal.Classes
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.AccessLevel)
+                .WithOne()
+                .HasForeignKey<User>(u => u.AccessId);
+
             modelBuilder.Entity<Marks>()
                 .HasOne(m => m.Subject) 
                 .WithMany()             
